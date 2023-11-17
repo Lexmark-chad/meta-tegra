@@ -369,7 +369,8 @@ if [ $bup_blob -ne 0 -o $rcm_boot -ne 0 ]; then
 elif [ $no_flash -eq 0 -a -z "$sdcard" -a $external_device -eq 0 ]; then
     appfile_sed="-es,APPFILE_b,$appfile, -es,APPFILE,$appfile, -es,DATAFILE,$datafile,"
 elif [ $no_flash -ne 0 ]; then
-    touch APPFILE APPFILE_b DATAFILE
+    touch APPFILE APPFILE_b
+    echo "some data so tegraparser_v2 will not fail on a zero-length DATAFILE" > DATAFILE
 else
     pre_sdcard_sed="-es,APPFILE_b,$appfile, -es,APPFILE,$appfile,"
     if [ -n "$datafile" ]; then
